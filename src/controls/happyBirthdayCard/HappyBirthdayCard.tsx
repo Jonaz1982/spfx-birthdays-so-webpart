@@ -94,7 +94,6 @@ export class HappyBirthdayCard extends React.Component<IHappyBirthdayCardProps, 
   constructor(props: IHappyBirthdayCardProps) {
     super(props);
     const photo: string = `/_layouts/15/userphoto.aspx?size=L&username=${this.props.userEmail}`;
-    console.log(photo);
     this._Persona = {
       imageUrl: photo ? photo : ''
     };

@@ -16,11 +16,11 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
     "group": { "default": "Other" },
-    "title": { "default": "Birthdays Web Part" },
-    "description": { "default": "Birthdays Web Part" },
+    "title": { "default": "Cumpleaños Sistecredito" },
+    "description": { "default": "Cumpleañoss Sistecredito" },
     "officeFabricIconFontName": "BirthdayCake",
     "properties": {
-      "title": "Birthdays",
+      "title": "Cumpleaños",
       "numberUpcomingDays": 5,
       "template": 8
     }

@@ -147,7 +147,7 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
                   label: strings.NumberUpComingDaysLabel,
                   description: strings.NumberUpComingDaysLabel,
                   value: this.properties.numberUpcomingDays,
-                  maxValue: 10,
+                  maxValue: 90,
                   minValue: 5,
                   disabled: false
                 }),

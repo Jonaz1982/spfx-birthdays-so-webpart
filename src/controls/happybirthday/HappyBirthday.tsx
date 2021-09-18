@@ -11,26 +11,13 @@ import { Label } from 'office-ui-fabric-react/lib/Label';
 import * as strings from 'ControlStrings';
 
 export class HappyBirthday extends React.Component<IHappyBirthdayProps, IHappbirthdayState> {
-
-  private _showBirthdays: boolean = true;
   constructor(props: IHappyBirthdayProps) {
     super(props);
-    // this.props.users.push({ key: "enunez@dgcp.gob.do", userName: "Ely Michael Núñez De la Rosa", userEmail: "enunez@dgcp.gob.do", jobDescription: "Administrador de Sistemas", birthday: moment.utc("2000-10-16").local().format() });
-    // this.props.users.push({ key: "pcuesta@dgcp.gob.do", userName: "Paola Estefanie Cuesta Gonzalez", userEmail: "pcuesta@dgcp.gob.do", jobDescription: "Abogada", birthday: moment.utc("2000-10-16").local().format() });
-    // this.props.users.push({ key: "enunez@dgcp.gob.do", userName: "Ely Michael Núñez", userEmail: "enunez@dgcp.gob.do", jobDescription: "Administrador de Sistemas", birthday: moment.utc("2000-10-16").local().format() });
-    // this.props.users.push({ key: "enunez@dgcp.gob.do", userName: "Ely Michael Núñez", userEmail: "enunez@dgcp.gob.do", jobDescription: "Administrador de Sistemas", birthday: moment.utc("2000-10-16").local().format() });
-    // this.props.users.push({ key: "enunez@dgcp.gob.do", userName: "Ely Michael Núñez", userEmail: "enunez@dgcp.gob.do", jobDescription: "Administrador de Sistemas", birthday: moment.utc("2000-10-16").local().format() });
-
-    console.log(props);
-  }
-
-  public async componentDidMount() {
   }
 
   public componentDidUpdate(prevProps: IHappyBirthdayProps, prevState: IHappbirthdayState): void {
   }
 
-  //
   public render(): React.ReactElement<IHappyBirthdayProps> {
     return (
       <div className={styles.happyBirthday}>

@@ -26,9 +26,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
   }
 
   public componentDidMount(): void {
-    // this.GetUsers();
-    let UsersSistecredito = this._spServices.GetUsers(this.props.context);
-    console.log(UsersSistecredito);
+    this.GetUsers();
   }
 
   public componentDidUpdate(prevProps: IBirthdaysProps, prevState: IBirthdayState): void {
@@ -77,13 +75,27 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
   }
   // Load List Of Users
   private async GetUsers() {
+    //Dates
+    let initDate = moment.utc().set({'year':2000,'hours':0,'minutes':0,'seconds':0});
+    let endingDate = moment.utc().set({'year':2000,'hours':0,'minutes':0,'seconds':0}).add(this.props.numberUpcomingDays, 'days');
+    if (endingDate > moment.utc('2000-12-31T00:00:00Z')) endingDate = moment.utc('2000-12-31T00:00:00Z');
+    
+    //SP
     let _otherMonthsBirthdays: IUser[], _dezemberBirthdays: IUser[];
-    const listItems = await this._spServices.getPBirthdays(this.props.numberUpcomingDays);
+    //const listItems = await this._spServices.getPBirthdays(this.props.numberUpcomingDays);
+    var listItems = await this._spServices.GetUsers(this.props.context);
+    console.log(listItems);
+    
+    //Logic
     if (listItems && listItems.length > 0) {
       _otherMonthsBirthdays = [];
       _dezemberBirthdays = [];
       for (const item of listItems) {
-        this._users.push({ key: item.fields.email, userName: item.fields.Title, userEmail: item.fields.email, jobDescription: item.fields.JobTitle, birthday: moment.utc(item.fields.Birthday).local().format() });
+        if (item.RefinableDate00){
+          let dateBirth = moment.utc(item.RefinableDate00).local();
+          if (dateBirth >= initDate && dateBirth <= endingDate)
+            this._users.push({ key: item.WorkEmail, userName: item.Title, userEmail: item.WorkEmail, jobDescription: item.JobTitle, birthday: dateBirth.format() });
+        }
       }
       // Sort Items by Birthday MSGraph List Items API don't support ODATA orderBy
       // for end of year teste and sorting

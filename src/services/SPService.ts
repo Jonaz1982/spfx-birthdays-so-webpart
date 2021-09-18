@@ -10,13 +10,36 @@ export class SPService {
   constructor(private _context: WebPartContext | ApplicationCustomizerContext) {
 
   }
+
+  private fixUserArray(arr: any){
+    return arr.PrimaryQueryResult.RelevantResults.Table.Rows.map((row) => {
+      return row.Cells.reduce((res, cell) => {
+          res[cell.Key] = cell.Value;
+          return res;
+      }, {});
+    });
+  }
+
   public async GetUsers (context: WebPartContext){
     try {
-      let data = await context.spHttpClient.get(`${context.pageContext.web.absoluteUrl}/_api/search/query?querytext='*'&sourceid='B09A7990-05EA-4AF9-81EF-EDFAB16C4E31'&selectproperties='Title,AccountName,Path,WorkEmail,RefinableDate00,OfficeNumber,Department,JobTitle,WorkPhone'&rowlimit=500&startrow=501`, SPHttpClient.configurations.v1);
-      let jsonData = await data.json();
-      return jsonData;
+      let data1 = await context.spHttpClient.get(`${context.pageContext.web.absoluteUrl}/_api/search/query?querytext='*'&sourceid='B09A7990-05EA-4AF9-81EF-EDFAB16C4E31'&selectproperties='Title,AccountName,Path,WorkEmail,RefinableDate00,OfficeNumber,Department,JobTitle,WorkPhone'&rowlimit=500&startrow=1`, SPHttpClient.configurations.v1);
+      let data2 = await context.spHttpClient.get(`${context.pageContext.web.absoluteUrl}/_api/search/query?querytext='*'&sourceid='B09A7990-05EA-4AF9-81EF-EDFAB16C4E31'&selectproperties='Title,AccountName,Path,WorkEmail,RefinableDate00,OfficeNumber,Department,JobTitle,WorkPhone'&rowlimit=500&startrow=501`, SPHttpClient.configurations.v1);
+      let data3 = await context.spHttpClient.get(`${context.pageContext.web.absoluteUrl}/_api/search/query?querytext='*'&sourceid='B09A7990-05EA-4AF9-81EF-EDFAB16C4E31'&selectproperties='Title,AccountName,Path,WorkEmail,RefinableDate00,OfficeNumber,Department,JobTitle,WorkPhone'&rowlimit=500&startrow=1001`, SPHttpClient.configurations.v1);
+      let jsonData1 = await data1.json();
+      let jsonData2 = await data2.json();
+      let jsonData3 = await data3.json();
+
+      let results1 = this.fixUserArray(jsonData1);
+      let results2 = this.fixUserArray(jsonData2);
+      let results3 = this.fixUserArray(jsonData3);
+  
+      let fullCall = results1.concat(results2).concat(results3);
+      let fullCallSorted = fullCall.filter(a => a.WorkEmail != "" && a.WorkEmail != null);
+
+      return fullCallSorted;
+
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return(null);
     }
 
