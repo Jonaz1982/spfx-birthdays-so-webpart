@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "Cumpleaños Sistecredito",
+    "name": "Cumpleanos Sistecredito",
     "id": "57890dd1-b655-4ec8-85ec-e47a9b696e7c",
     "version": "1.0.0.3",
     "includeClientSideAssets": true,
